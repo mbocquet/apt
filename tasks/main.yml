@@ -1,0 +1,26 @@
+---
+# tasks file for apt-config
+- name: "apt.conf"
+  template:
+    src: "apt.conf.j2"
+    dest: '/etc/apt/apt.conf'
+    backup: 'yes'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+   - apt
+   - conf
+
+- name: "sources.list"
+  template:
+    src: "sources.list.{{ ansible_lsb['id'] }}.{{ apt_codename | default(ansible_lsb['codename']) }}.j2"
+    dest: '/etc/apt/sources.list'
+    backup: 'yes'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - apt
+    - sources
+...

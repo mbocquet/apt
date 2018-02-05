@@ -1,0 +1,2 @@
+// {{ ansible_managed }}
+APT::Default-Release "{% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}";
