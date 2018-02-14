@@ -1,4 +1,4 @@
-# apt-config
+# apt
 
 Ansible role to configure APT.
 
