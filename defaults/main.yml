@@ -1,3 +1,29 @@
 ---
 # defaults file for apt
+
+# just deb or also deb-src
+apt_debs:
+  - deb
+  - deb-src
+
+# mirrors URLs
+apt_mirror_url: 'https://deb.debian.org/debian'
+
+# The following two variables are ignored during Raspbian sources.list
+# construction from template
+apt_security_url: 'http://security.debian.org'
+apt_updates: 'True'
+
+# default components for Debian
+apt_components:
+  - main
+  - contrib
+  - non-free
+
+# default components for Raspbian
+# apt_components:
+#   - main
+#   - contrib
+#   - non-free
+#   - rpi
 ...

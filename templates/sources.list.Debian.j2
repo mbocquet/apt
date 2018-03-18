@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+
+{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}
+
+{% if apt_security_url is defined %}{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}/updates{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}{% endif %}
+
+{% if apt_updates is defined and apt_updates == 'True' %}# {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates, previously known as 'volatile'
+{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}{% endif %}

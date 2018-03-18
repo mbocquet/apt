@@ -14,7 +14,7 @@
 
 - name: "sources.list"
   template:
-    src: "sources.list.{{ ansible_lsb['id'] }}.{{ apt_codename | default(ansible_lsb['codename']) }}.j2"
+    src: "sources.list.{{ ansible_lsb['id'] }}.j2"
     dest: '/etc/apt/sources.list'
     backup: 'yes'
     owner: root
