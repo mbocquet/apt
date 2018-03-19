@@ -1,5 +1,5 @@
 ---
-# tasks file for apt-config
+# tasks file for apt
 - name: "apt.conf"
   template:
     src: "apt.conf.j2"
@@ -23,4 +23,12 @@
   tags:
     - apt
     - sources
+
+- name: "dpkg options"
+  template:
+    src: 'dpkg.j2'
+    dest: '/etc/apt/apt.conf.d/80dpkg'
+  tags:
+    - apt
+    - dpkg
 ...
