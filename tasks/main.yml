@@ -8,6 +8,9 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - apt_codename is defined
+    - apt_codename != 'testing'
   tags:
    - apt
    - conf
@@ -30,6 +33,7 @@
   template:
     src: 'dpkg.j2'
     dest: '/etc/apt/apt.conf.d/80dpkg'
+  ignore_errors: true
   tags:
     - apt
     - dpkg
