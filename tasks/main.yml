@@ -20,6 +20,8 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - update cache
   tags:
     - apt
     - sources
