@@ -18,6 +18,13 @@ None.
 
 `git submodule add https://github.com/mbocquet/apt.git roles/apt`
 
+## Before running
+
+This role can configure dpkg options (see templates/dpkg.j2.example).
+
+Copy this file in your templates search path as dpkg.j2 and tweak it to your
+needs before running this role.
+
 ## Example Playbook
 
     - hosts: servers
