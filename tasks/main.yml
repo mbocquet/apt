@@ -11,6 +11,8 @@
   when:
     - apt_codename is defined
     - apt_codename != 'testing'
+  notify:
+    - update cache
   tags:
    - apt
    - conf
