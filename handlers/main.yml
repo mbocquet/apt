@@ -1,7 +1,5 @@
 ---
 # handlers file for apt-config
 - name: "update cache"
-  apt:
-    update_cache: yes
-  ignore_errors: true
+  shell: 'apt update'
 ...
