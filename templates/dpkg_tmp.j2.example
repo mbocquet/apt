@@ -1,0 +1,6 @@
+// {{ ansible_managed }}
+//
+// This is an example, you should copy this file in your templates search path
+// as dpkg_tmp.j2 and tweak it as needed
+DPkg::Pre-Invoke {"mount -o remount,exec /tmp";};
+DPkg::Post-Invoke {"mount -o remount /tmp";};

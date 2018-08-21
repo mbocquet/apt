@@ -1,5 +1,7 @@
 // {{ ansible_managed }}
 //
 // This is an example, you should copy this file in your templates search path
-// as dpkg_options.j2 and tweak it as needed
+// as dpkg.j2 and tweak it as needed
 DPkg::Options { "--force-confdef"; "--force-confold"; }
+DPkg::Pre-Invoke {"mount -o remount,exec /tmp";};
+DPkg::Post-Invoke {"mount -o remount /tmp";};

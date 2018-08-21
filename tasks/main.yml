@@ -33,10 +33,28 @@
 
 - name: "dpkg options"
   template:
-    src: 'dpkg.j2'
+    src: 'dpkg_options.j2'
     dest: '/etc/apt/apt.conf.d/80dpkg'
-  ignore_errors: true
   tags:
     - apt
     - dpkg
+    - options
+
+- name: "check for noexec /tmp"
+  shell: mount|grep -w /tmp|grep -q noexec
+  register: tmp_noexec
+  tags:
+    - apt
+    - dpkg
+    - tmp
+
+- name: "dpkg options for noexec /tmp"
+  template:
+    src: 'dpkg_tmp.j2'
+    dest: '/etc/apt/apt.conf.d/81dpkg'
+  when: tmp_noexec is success
+  tags:
+    - apt
+    - dpkg
+    - tmp
 ...
