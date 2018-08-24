@@ -41,7 +41,8 @@
     - options
 
 - name: "check for noexec /tmp"
-  shell: mount|grep -w /tmp|grep -q noexec
+  shell: 'grep -wq /tmp /etc/fstab && mount|grep -w /tmp|grep -q noexec 2>/dev/null'
+  ignore_errors: true
   register: tmp_noexec
   tags:
     - apt
