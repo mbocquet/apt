@@ -33,12 +33,31 @@
 
 - name: "dpkg options"
   template:
-    src: 'dpkg.j2'
+    src: 'dpkg_options.j2'
     dest: '/etc/apt/apt.conf.d/80dpkg'
-  ignore_errors: true
   tags:
     - apt
     - dpkg
+    - options
+
+- name: "check for noexec /tmp"
+  shell: 'grep -wq /tmp /etc/fstab && mount|grep -w /tmp|grep -q noexec 2>/dev/null'
+  ignore_errors: true
+  register: tmp_noexec
+  tags:
+    - apt
+    - dpkg
+    - tmp
+
+- name: "dpkg options for noexec /tmp"
+  template:
+    src: 'dpkg_tmp.j2'
+    dest: '/etc/apt/apt.conf.d/81dpkg'
+  when: tmp_noexec is success
+  tags:
+    - apt
+    - dpkg
+    - tmp
 
 - name: "network options"
   template:
