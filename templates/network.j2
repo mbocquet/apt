@@ -1,0 +1,7 @@
+// {{ ansible_managed }} (role: apt, template: network.j2)
+{% if proxy_env is defined and proxy_env != '' %}
+Acquire::http::Proxy "{{ proxy }}";
+Acquire::https::Proxy "{{ proxy }}";
+{% else %}
+// proxy_env was empty at runtime.
+{% endif %}

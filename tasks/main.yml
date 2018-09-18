@@ -39,4 +39,12 @@
   tags:
     - apt
     - dpkg
+
+- name: "network options"
+  template:
+    src: network.j2
+    dest: '/etc/apt/apt.conf.d/30network'
+  tags:
+    - apt
+    - network
 ...
