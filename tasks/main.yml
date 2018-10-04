@@ -53,7 +53,7 @@
   template:
     src: 'dpkg_tmp.j2'
     dest: '/etc/apt/apt.conf.d/81dpkg'
-  when: tmp_noexec is success
+  when: tmp_noexec is succeeded
   tags:
     - apt
     - dpkg
