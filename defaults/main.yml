@@ -12,7 +12,7 @@ apt_mirror_url: 'http://deb.debian.org/debian'
 
 # The following two variables are ignored during Raspbian sources.list
 # construction from template
-apt_security_url: 'http://security.debian.org'
+apt_security_url: 'https://deb.debian.org/debian-security'
 apt_updates: 'True'
 
 # default components for Debian
