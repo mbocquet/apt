@@ -8,7 +8,7 @@ apt_debs:
 
 # mirrors URLs
 # Install apt-transport-https before enabling https in sources URLs
-apt_mirror_url: 'http://deb.debian.org/debian'
+apt_mirror_url: 'https://deb.debian.org/debian'
 
 # The following two variables are ignored during Raspbian sources.list
 # construction from template
