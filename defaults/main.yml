@@ -4,7 +4,7 @@
 # just deb or also deb-src
 apt_debs:
   - deb
-  - deb-src
+#  - deb-src
 
 # mirrors URLs
 # Install apt-transport-https before enabling https in sources URLs
@@ -18,8 +18,8 @@ apt_updates: 'True'
 # default components for Debian
 apt_components:
   - main
-# - contrib
-# - non-free
+#  - contrib
+#  - non-free
 
 # default components for Raspbian
 # apt_components:
