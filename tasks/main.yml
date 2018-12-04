@@ -66,4 +66,16 @@
   tags:
     - apt
     - network
+
+- name: "apt repositories"
+  apt_repository:
+    filename: '{{ item.filename }}'
+    repo: '{{ item.repo }}'
+    state: '{{ item.state }}'
+    update_cache: yes
+  with_items: '{{ apt_repositories }}'
+  when: apt_repositories is defined
+  tags:
+    - apt
+    - repositories
 ...

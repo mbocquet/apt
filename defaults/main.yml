@@ -1,6 +1,10 @@
 ---
 # defaults file for apt
 
+# Most values here are default ones. If you wish to change them, use
+# group_vars/*.yml or host_vars/*.yml files to override variables. Content in
+# this file is subject to change on future releases.
+
 # just deb or also deb-src
 apt_debs:
   - deb
@@ -27,4 +31,11 @@ apt_components:
 #   - contrib
 #   - non-free
 #   - rpi
+
+# additional repositories to add
+# apt_repositories:
+#   - filename: 'armbian'
+#     repo: 'deb http://apt.armbian.com stretch main stretch-desktop stretch-utils utils'
+#   - filename: 'docker'
+#     repo: 'deb https://download.docker.com/linux/debian stretch stable'
 ...
