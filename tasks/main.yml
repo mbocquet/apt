@@ -63,6 +63,7 @@
   template:
     src: network.j2
     dest: '/etc/apt/apt.conf.d/30network'
+  when: proxy_env is defined
   tags:
     - apt
     - network
