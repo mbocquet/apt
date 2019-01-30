@@ -1,6 +1,6 @@
 # apt
 
-Ansible role to configure APT.
+Ansible role to configure APT (Advanced Package Tool) on Debian.
 
 ## Requirements
 
