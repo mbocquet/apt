@@ -1,6 +1,6 @@
 galaxy_info:
   author: Mathias BOCQUET
-  description: Configure APT
+  description: Ansible role to configure APT (Advanced Package Tool) on Debian like systems
   company: Sekoya.org
 
   license: GPLv3

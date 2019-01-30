@@ -68,6 +68,16 @@
     - apt
     - network
 
+- name: backports
+  template:
+    src: backports.list.j2
+    dest: '/etc/apt/sources.list.d/{{ apt_codename | default(ansible_distribution_release) }}-backports.list'
+  notify:
+    - update cache
+  when:
+    - apt_backports is defined
+    - apt_backports|lower() in ['true','yes']
+
 - name: "apt repositories"
   apt_repository:
     filename: '{{ item.filename }}'
@@ -79,4 +89,18 @@
   tags:
     - apt
     - repositories
+
+- name: "allow {{ apt_codename | default(ansible_distribution_release) }}-updates via preferences"
+  template:
+    src: updates.preferences.j2
+    dest: '/etc/apt/preferences.d/{{ apt_codename | default(ansible_distribution_release) }}-updates'
+  notify:
+      - gen caches
+  when:
+    - apt_updates is defined
+    - apt_updates|lower() in ['true','yes']
+  tags:
+    - apt
+    - updates
+    - preferences
 ...

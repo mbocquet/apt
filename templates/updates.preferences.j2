@@ -1,0 +1,5 @@
+# {{ ansible_managed }}. role: apt, file: updates.preferences.j2
+# set higher priority for packages from {{ apt_codename | default(ansible_distribution_release) }}-updates.
+Package: *
+Pin: release n={{ apt_codename | default(ansible_distribution_release) }}-updates
+Pin-Priority: 990

@@ -1,5 +1,8 @@
 ---
-# handlers file for apt-config
-- name: "update cache"
-  shell: 'apt update'
+# handlers file for apt
+- name: update cache
+  shell: apt update
+
+- name: gen caches
+  shell: apt-cache gencaches
 ...
