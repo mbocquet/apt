@@ -5,4 +5,8 @@
 
 - name: gen caches
   shell: apt-cache gencaches
+
+- name: systemd reload
+  systemd:
+    daemon_reload: yes
 ...

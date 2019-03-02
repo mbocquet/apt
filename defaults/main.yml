@@ -17,6 +17,8 @@ apt_mirror_url: 'https://deb.debian.org/debian'
 # The following two variables are ignored during Raspbian sources.list
 # construction from template
 apt_security_url: 'https://deb.debian.org/debian-security'
+
+# enable proposed-updates
 apt_updates: 'True'
 
 # default components for Debian
@@ -41,4 +43,9 @@ apt_components:
 
 # use backports
 # apt_backports: 'True'
+
+# apt-daily.timer parameters
+# apt_timer_oncalendar: '*-*-* 6,18:00'
+# apt_timer_randomizeddelaysec: '12h'
+# apt_timer_persistent: 'true'
 ...

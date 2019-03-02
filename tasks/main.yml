@@ -132,4 +132,60 @@
     - apt
     - updates
     - preferences
+
+- name: apt-daily timer override dir
+  file:
+    path: /etc/systemd/system/apt-daily.timer.d
+    state: directory
+  when:
+    apt_timer_oncalendar is defined or
+    apt_timer_randomizeddelaysec is defined or
+    apt_timer_persistent is defined
+  tags:
+    - apt
+    - timer
+
+- name: apt-daily timer override
+  template:
+    src: apt-daily.timer.override.conf.j2
+    dest: /etc/systemd/system/apt-daily.timer.d/override.conf
+  when:
+    apt_timer_oncalendar is defined or
+    apt_timer_randomizeddelaysec is defined or
+    apt_timer_persistent is defined
+  notify:
+    - systemd reload
+  tags:
+    - apt
+    - timer
+
+- name: remove apt-daily timer override
+  file:
+    path: /etc/systemd/system/apt-daily.timer.d/override.conf
+    state: absent
+  when:
+    not (
+    apt_timer_oncalendar is defined or
+    apt_timer_randomizeddelaysec is defined or
+    apt_timer_persistent is defined
+    )
+  notify:
+    - systemd reload
+  tags:
+    - apt
+    - timer
+
+- name: remove apt-daily timer override dir
+  file:
+    path: /etc/systemd/system/apt-daily.timer.d
+    state: absent
+  when:
+    not (
+    apt_timer_oncalendar is defined or
+    apt_timer_randomizeddelaysec is defined or
+    apt_timer_persistent is defined
+    )
+  tags:
+    - apt
+    - timer
 ...
