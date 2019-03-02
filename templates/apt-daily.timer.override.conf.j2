@@ -1,0 +1,12 @@
+# {{ ansible_managed }}. role: apt, file: apt-daily.timer.override.conf.j2
+
+[Timer]
+{% if apt_timer_oncalendar is defined %}
+OnCalendar={{ apt_timer_oncalendar }}
+{% endif %}
+{% if apt_timer_randomizeddelaysec is defined %}
+RandomizedDelaySec={{ apt_timer_randomizeddelaysec }}
+{% endif %}
+{% if apt_timer_persistent is defined %}
+Persistent={{ apt_timer_persistent }}
+{% endif %}
