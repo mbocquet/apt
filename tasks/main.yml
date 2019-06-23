@@ -124,8 +124,8 @@
   notify:
       - gen caches
   when:
-    - apt_updates is defined
-    - apt_updates|lower() in ['true','yes']
+    - apt_proposed_updates is defined
+    - apt_proposed_updates|lower() in ['true','yes']
   tags:
     - apt
     - updates

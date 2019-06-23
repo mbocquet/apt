@@ -8,7 +8,7 @@
 
 {% endfor %}{% endif %}
 
-{% if apt_updates is defined and apt_updates == 'True' %}# {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates, previously known as 'volatile'
+{% if apt_proposed_updates is defined and apt_proposed_updates == 'True' %}# {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates, previously known as 'volatile'
 {% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates{% for component in apt_components %} {{ component }}{% endfor %}
 
 {% endfor %}{% endif %}
