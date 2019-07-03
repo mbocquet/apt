@@ -75,8 +75,7 @@
   notify:
     - update cache
   when:
-    - apt_backports is defined
-    - apt_backports|lower() in ['true','yes']
+    apt_backports is not defined or apt_backports|lower() in ['true','yes']
   tags:
     - apt
     - backports
@@ -101,8 +100,7 @@
   notify:
     - update cache
   when:
-    - apt_backports is defined
-    - apt_backports|lower() in ['false','no']
+    apt_backports is not defined or apt_backports|lower() in ['false','no']
   tags:
     - apt
     - backports
@@ -126,8 +124,8 @@
   notify:
     - gen caches
   when:
-    - apt_updates is defined
-    - apt_updates|lower() in ['true','yes']
+    - apt_proposed_updates is defined
+    - apt_proposed_updates|lower() in ['true','yes']
   tags:
     - apt
     - updates

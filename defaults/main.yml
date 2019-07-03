@@ -18,8 +18,8 @@ apt_mirror_url: 'https://deb.debian.org/debian'
 # construction from template
 apt_security_url: 'https://deb.debian.org/debian-security'
 
-# enable proposed-updates
-apt_updates: 'True'
+# handle proposed-updates repo
+apt_proposed_updates: False
 
 # default components for Debian
 apt_components:
