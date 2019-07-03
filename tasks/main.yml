@@ -14,8 +14,8 @@
   notify:
     - update cache
   tags:
-   - apt
-   - conf
+    - apt
+    - conf
 
 - name: "sources.list"
   template:
@@ -112,7 +112,7 @@
     filename: '{{ item.filename }}'
     repo: '{{ item.repo }}'
     state: '{{ item.state }}'
-    update_cache: yes
+    update_cache: true
   with_items: '{{ apt_repositories }}'
   when: apt_repositories is defined
   tags:
@@ -124,7 +124,7 @@
     src: updates.preferences.j2
     dest: '/etc/apt/preferences.d/{{ apt_codename | default(ansible_distribution_release) }}-updates'
   notify:
-      - gen caches
+    - gen caches
   when:
     - apt_updates is defined
     - apt_updates|lower() in ['true','yes']
