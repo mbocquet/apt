@@ -117,6 +117,18 @@
     - apt
     - repositories
 
+- name: "remove {{ apt_codename | default(ansible_distribution_release) }}-updates preferences"
+  file:
+    path: '/etc/apt/preferences.d/{{ apt_codename | default(ansible_distribution_release) }}-updates'
+    state: absent
+  notify:
+    - gen caches
+  when: apt_proposed_updates is not defined or apt_proposed_updates|lower() in ['false','no']
+  tags:
+    - apt
+    - updates
+    - preferences
+
 - name: "allow {{ apt_codename | default(ansible_distribution_release) }}-updates via preferences"
   template:
     src: updates.preferences.j2
