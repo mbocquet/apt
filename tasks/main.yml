@@ -10,7 +10,18 @@
     mode: 0644
   when:
     - apt_codename is defined
-    - apt_codename != 'testing'
+  notify:
+    - update cache
+  tags:
+    - apt
+    - conf
+
+- name: apt.conf
+  file:
+    path: '/etc/apt/apt.conf'
+    state: absent
+  when:
+    - apt_codename is not defined
   notify:
     - update cache
   tags:
@@ -78,6 +89,7 @@
     apt_backports is not defined or apt_backports|lower() in ['true','yes']
   tags:
     - apt
+    - sources
     - backports
 
 - name: backports
@@ -91,6 +103,7 @@
     - apt_backports|lower() in ['true','yes']
   tags:
     - apt
+    - sources
     - backports
 
 - name: remove backports.list
@@ -103,6 +116,7 @@
     apt_backports is not defined or apt_backports|lower() in ['false','no']
   tags:
     - apt
+    - sources
     - backports
 
 - name: additional repositories
@@ -111,10 +125,11 @@
     repo: '{{ item.repo }}'
     state: '{{ item.state }}'
     update_cache: true
-  with_items: '{{ apt_repositories }}'
+  loop: '{{ apt_repositories }}'
   when: apt_repositories is defined
   tags:
     - apt
+    - sources
     - repositories
 
 - name: "remove {{ apt_codename | default(ansible_distribution_release) }}-updates preferences"
