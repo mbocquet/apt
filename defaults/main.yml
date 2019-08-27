@@ -5,6 +5,13 @@
 # group_vars/*.yml or host_vars/*.yml files to override variables. Content in
 # this file is subject to change on future releases.
 
+# Only one of these two variables should be defined :
+# apt_codename : value should be a codename in 'stretch' or 'buster' or 'bullseye', etc.
+# apt_codename: 'buster'
+# or
+# apt_release : value should be a release in 'stable', 'testing', 'unstable', etc.
+# apt_release: 'stable'
+
 # just deb or also deb-src
 apt_debs:
   - deb

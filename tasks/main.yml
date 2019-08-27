@@ -86,7 +86,8 @@
   notify:
     - update cache
   when:
-    apt_backports is not defined or apt_backports|lower() in ['true','yes']
+    - apt_codename is defined
+    - apt_backports is not defined or apt_backports|lower() in ['true','yes']
   tags:
     - apt
     - sources
