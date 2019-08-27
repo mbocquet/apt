@@ -38,8 +38,10 @@ apt_components:
 # apt_repositories:
 #   - filename: 'armbian'
 #     repo: 'deb http://apt.armbian.com stretch main stretch-desktop stretch-utils utils'
+#     state: present
 #   - filename: 'docker'
 #     repo: 'deb https://download.docker.com/linux/debian stretch stable'
+#     state: present
 
 # use backports
 # apt_backports: 'True'
