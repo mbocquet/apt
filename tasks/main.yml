@@ -133,9 +133,9 @@
     - sources
     - repositories
 
-- name: "remove {{ apt_codename | default(ansible_distribution_release) }}-updates preferences"
+- name: "remove *-updates preferences"
   file:
-    path: '/etc/apt/preferences.d/{{ apt_codename | default(ansible_distribution_release) }}-updates'
+    path: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates"
     state: absent
   notify:
     - gen caches
@@ -145,10 +145,10 @@
     - updates
     - preferences
 
-- name: "allow {{ apt_codename | default(ansible_distribution_release) }}-updates via preferences"
+- name: "allow {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates via preferences"
   template:
     src: updates.preferences.j2
-    dest: '/etc/apt/preferences.d/{{ apt_codename | default(ansible_distribution_release) }}-updates'
+    dest: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates"
   notify:
     - gen caches
   when:
