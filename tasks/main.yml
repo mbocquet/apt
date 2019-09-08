@@ -120,6 +120,21 @@
     - sources
     - backports
 
+- name: additional repositories preferences
+  template:
+    src: extra.preferences.j2
+    dest: '/etc/apt/preferences.d/{{ item.filename }}'
+  loop: '{{ apt_repositories }}'
+  notify:
+    - gen caches
+  when:
+    - apt_repositories is defined
+    - item.apt_pin_priority is defined
+  tags:
+    - apt
+    - extra
+    - preferences
+
 - name: additional repositories
   apt_repository:
     filename: '{{ item.filename }}'
