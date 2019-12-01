@@ -1,6 +1,6 @@
 # apt
 
-Ansible role to configure APT (Advanced Package Tool) on Debian.
+Ansible role to configure APT (Advanced Package Tool) on Debian like systems.
 
 ## Requirements
 
@@ -8,7 +8,7 @@ None.
 
 ## Role Variables
 
-None.
+Many. See defaults/main.yml
 
 ## Dependencies
 
@@ -16,7 +16,7 @@ None.
 
 ## Install this role as submodule in a git repository
 
-`git submodule add https://github.com/mbocquet/apt.git roles/apt`
+`git submodule add https://git.sekoya.org/mb/apt.git roles/apt`
 
 ## Before running
 
