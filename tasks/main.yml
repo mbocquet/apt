@@ -1,32 +1,5 @@
 ---
 # tasks file for apt
-- name: apt.conf
-  template:
-    src: "apt.conf.j2"
-    dest: '/etc/apt/apt.conf'
-    backup: 'yes'
-    owner: root
-    group: root
-    mode: 0644
-  when:
-    - apt_codename is defined
-  notify:
-    - update cache
-  tags:
-    - apt
-    - conf
-
-- name: apt.conf
-  file:
-    path: '/etc/apt/apt.conf'
-    state: absent
-  when:
-    - apt_codename is not defined
-  notify:
-    - update cache
-  tags:
-    - apt
-    - conf
 
 - name: sources.list
   template:
