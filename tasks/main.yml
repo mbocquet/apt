@@ -25,9 +25,10 @@
     - options
 
 - name: check for noexec /tmp
-  shell: 'grep -wq /tmp /etc/fstab && mount|grep -w /tmp|grep -q noexec 2>/dev/null'
+  shell: grep -wq /tmp.*noexec /etc/fstab
   ignore_errors: true
   register: tmp_noexec
+  changed_when: false
   tags:
     - apt
     - dpkg
