@@ -26,7 +26,7 @@ apt_mirror_url: 'https://deb.debian.org/debian'
 apt_security_url: 'https://deb.debian.org/debian-security'
 
 # handle proposed-updates repo
-apt_proposed_updates: False
+apt_proposed_updates: false
 
 # default components for Debian
 apt_components:

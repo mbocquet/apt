@@ -2,12 +2,12 @@
 # handlers file for apt
 - name: update cache
   apt:
-    update_cache: yes
+    update_cache: true
 
 - name: gen caches
   command: apt-cache gencaches
 
 - name: systemd reload
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
 ...
