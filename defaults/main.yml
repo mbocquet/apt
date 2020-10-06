@@ -57,4 +57,7 @@ apt_components:
 # apt_timer_oncalendar: '*-*-* 6,18:00'
 # apt_timer_randomizeddelaysec: '12h'
 # apt_timer_persistent: 'true'
-...
+
+# apt_pad (APT option Proxy-Auto-Detect)
+# Executable to use with APT to auto-detect http(s) proxy
+# apt_pad: '/usr/local/bin/proxy-auto-detect'

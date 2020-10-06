@@ -2,6 +2,8 @@
 {% if proxy_env is defined and proxy_env != '' %}
 Acquire::http::Proxy "{{ proxy }}";
 Acquire::https::Proxy "{{ proxy }}";
-{% else %}
-// proxy_env was empty at runtime.
+{% endif %}
+{% if apt_pad is defined and apt_pad != '' %}
+Acquire::http::Proxy-Auto-Detect "{{ apt_pad }}";
+Acquire::https::Proxy-Auto-Detect "{{ apt_pad }}";
 {% endif %}
