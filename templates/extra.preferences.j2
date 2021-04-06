@@ -1,4 +1,4 @@
-# {{ ansible_managed }}. role: apt, file: extra.preferences.j2
+# {{ ansible_managed }}. role: {{ role_name }}, template: extra.preferences.j2
 Package: *
 Pin: release o=Debian,a={{ item.archive }}
 Pin-Priority: {{ item.apt_pin_priority }}
