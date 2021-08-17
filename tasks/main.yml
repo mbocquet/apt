@@ -3,7 +3,7 @@
 
 - name: sources.list
   template:
-    src: "sources.list.{{ ansible_lsb['id'] }}.j2"
+    src: "sources.list.{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.j2"
     dest: '/etc/apt/sources.list'
     backup: 'yes'
     owner: root
@@ -126,7 +126,7 @@
 
 - name: "remove *-updates preferences"
   file:
-    path: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates"
+    path: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates"
     state: absent
   notify:
     - gen caches
@@ -136,10 +136,10 @@
     - updates
     - preferences
 
-- name: "allow {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates via preferences"
+- name: allow 'release'-updates via preferences
   template:
     src: updates.preferences.j2
-    dest: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-updates"
+    dest: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates"
   notify:
     - gen caches
   when:
