@@ -3,11 +3,16 @@
 - name: update cache
   apt:
     update_cache: true
+  when:
+    - not ansible_check_mode
 
 - name: gen caches
   command: apt-cache gencaches
+  when:
+    - not ansible_check_mode
 
 - name: systemd reload
   systemd:
     daemon_reload: true
-...
+  when:
+    - not ansible_check_mode
