@@ -1,4 +1,4 @@
-# {{ ansible_managed }}. role: apt, template: sources.list.Debian-11.j2
+# {{ ansible_managed }}. role: apt, template: sources.list.Debian-buster.j2
 
 {% for deb in apt_debs %}
 {{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}
@@ -7,7 +7,7 @@
 {% endfor %}
 
 {% if apt_security_url is defined %}
-{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-security{% for component in apt_components %} {{ component }}{% endfor %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}/updates{% for component in apt_components %} {{ component }}{% endfor %}
 
 {% endfor %}
 {% endif %}
