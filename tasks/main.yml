@@ -18,6 +18,9 @@
   template:
     src: dpkg_options.j2
     dest: /etc/apt/apt.conf.d/80dpkg
+    owner: root
+    group: root
+    mode: 0644
   tags:
     - apt
     - dpkg
@@ -37,6 +40,9 @@
   template:
     src: dpkg_tmp.j2
     dest: /etc/apt/apt.conf.d/81dpkg
+    owner: root
+    group: root
+    mode: 0644
   when: tmp_noexec is succeeded
   tags:
     - apt
@@ -47,6 +53,9 @@
   template:
     src: network.j2
     dest: /etc/apt/apt.conf.d/30network
+    owner: root
+    group: root
+    mode: 0644
   when:
     proxy_env is defined or
     apt_pad is defined
@@ -72,6 +81,9 @@
   template:
     src: backports.list.j2
     dest: /etc/apt/sources.list.d/backports.list
+    owner: root
+    group: root
+    mode: 0644
   notify:
     - update cache
   when:
@@ -99,6 +111,9 @@
   template:
     src: extra.preferences.j2
     dest: "/etc/apt/preferences.d/{{ item.filename }}"
+    owner: root
+    group: root
+    mode: 0644
   loop: "{{ apt_repositories }}"
   notify:
     - gen caches
@@ -127,7 +142,10 @@
 
 - name: "remove *-updates preferences"
   file:
-    path: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates"
+    path: |-
+      "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}
+      {% elif apt_release is defined %}{{ apt_release }}{% else %}
+      {{ ansible_distribution_release }}{% endif %}-updates"
     state: absent
   notify:
     - gen caches
@@ -140,7 +158,13 @@
 - name: allow 'release'-updates via preferences
   template:
     src: updates.preferences.j2
-    dest: "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates"
+    dest: |-
+      "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}
+      {% elif apt_release is defined %}{{ apt_release }}{% else %}
+      {{ ansible_distribution_release }}{% endif %}-updates"
+    owner: root
+    group: root
+    mode: 0644
   notify:
     - gen caches
   when:
@@ -155,6 +179,9 @@
   file:
     path: /etc/systemd/system/apt-daily.timer.d
     state: directory
+    owner: root
+    group: root
+    mode: 0755
   when:
     apt_timer_oncalendar is defined or
     apt_timer_randomizeddelaysec is defined or
@@ -167,6 +194,9 @@
   template:
     src: apt-daily.timer.override.conf.j2
     dest: /etc/systemd/system/apt-daily.timer.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
   when:
     apt_timer_oncalendar is defined or
     apt_timer_randomizeddelaysec is defined or
