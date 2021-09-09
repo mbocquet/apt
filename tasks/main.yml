@@ -1,11 +1,10 @@
 ---
 # tasks file for apt
-
 - name: sources.list
   template:
     src: "sources.list.{{ ansible_os_family }}-{{ apt_codename | default (ansible_distribution_release) }}.j2"
-    dest: '/etc/apt/sources.list'
-    backup: 'yes'
+    dest: /etc/apt/sources.list
+    backup: true
     owner: root
     group: root
     mode: 0644
@@ -13,12 +12,12 @@
     - update cache
   tags:
     - apt
-    - sources
+    - sources.list
 
 - name: dpkg options
   template:
-    src: 'dpkg_options.j2'
-    dest: '/etc/apt/apt.conf.d/80dpkg'
+    src: dpkg_options.j2
+    dest: /etc/apt/apt.conf.d/80dpkg
   tags:
     - apt
     - dpkg
@@ -36,8 +35,8 @@
 
 - name: dpkg options for noexec /tmp
   template:
-    src: 'dpkg_tmp.j2'
-    dest: '/etc/apt/apt.conf.d/81dpkg'
+    src: dpkg_tmp.j2
+    dest: /etc/apt/apt.conf.d/81dpkg
   when: tmp_noexec is succeeded
   tags:
     - apt
@@ -47,7 +46,7 @@
 - name: network options
   template:
     src: network.j2
-    dest: '/etc/apt/apt.conf.d/30network'
+    dest: /etc/apt/apt.conf.d/30network
   when:
     proxy_env is defined or
     apt_pad is defined
@@ -57,7 +56,7 @@
 
 - name: remove dist-backports.list file if present
   file:
-    path: '/etc/apt/sources.list.d/{{ apt_codename | default(ansible_distribution_release) }}-backports.list'
+    path: "/etc/apt/sources.list.d/{{ apt_codename | default(ansible_distribution_release) }}-backports.list"
     state: absent
   notify:
     - update cache
@@ -72,7 +71,7 @@
 - name: backports
   template:
     src: backports.list.j2
-    dest: '/etc/apt/sources.list.d/backports.list'
+    dest: /etc/apt/sources.list.d/backports.list
   notify:
     - update cache
   when:
@@ -85,7 +84,7 @@
 
 - name: remove backports.list
   file:
-    path: '/etc/apt/sources.list.d/backports.list'
+    path: /etc/apt/sources.list.d/backports.list
     state: absent
   notify:
     - update cache
@@ -99,8 +98,8 @@
 - name: additional repositories preferences
   template:
     src: extra.preferences.j2
-    dest: '/etc/apt/preferences.d/{{ item.filename }}'
-  loop: '{{ apt_repositories }}'
+    dest: "/etc/apt/preferences.d/{{ item.filename }}"
+  loop: "{{ apt_repositories }}"
   notify:
     - gen caches
   when:
@@ -113,15 +112,17 @@
 
 - name: additional repositories
   apt_repository:
-    filename: '{{ item.filename }}'
-    repo: '{{ item.repo }}'
-    state: '{{ item.state }}'
-    update_cache: true
-  loop: '{{ apt_repositories }}'
+    filename: "{{ item.filename }}"
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+    update_cache: false
+  loop: "{{ apt_repositories }}"
+  notify:
+    - update cache
   when: apt_repositories is defined
   tags:
     - apt
-    - sources
+    - sources.list.d
     - repositories
 
 - name: "remove *-updates preferences"
@@ -205,4 +206,3 @@
   tags:
     - apt
     - timer
-...
