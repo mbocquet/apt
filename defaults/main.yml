@@ -6,10 +6,17 @@
 # this file is subject to change on future releases.
 
 # Only one of these two variables should be defined :
-# apt_codename : value should be a codename in 'stretch' or 'buster' or 'bullseye', etc.
+#
+# apt_codename : value should be a codename in 'stretch', 'buster' or
+# 'bullseye', etc.
+#
 # apt_codename: 'buster'
+#
 # or
-# apt_release : value should be a release in 'stable', 'testing', 'unstable', etc.
+#
+# apt_release : value should be a release in 'stable', 'testing', 'unstable',
+# etc.
+#
 # apt_release: 'stable'
 
 # just deb or also deb-src
@@ -25,14 +32,14 @@ apt_mirror_url: 'https://deb.debian.org/debian'
 # construction from template
 apt_security_url: 'https://deb.debian.org/debian-security'
 
-# handle proposed-updates repo
+# handle proposed-updates repository
 apt_proposed_updates: false
 
 # default components for Debian
 apt_components:
   - main
-  - contrib
-  - non-free
+  # - contrib
+  # - non-free
 
 # default components for Raspbian
 # apt_components:
@@ -42,12 +49,16 @@ apt_components:
 #   - rpi
 
 # additional repositories to add
+# example to add testing :
 # apt_repositories:
-#   - filename: 'armbian'
-#     repo: 'deb http://apt.armbian.com stretch main stretch-desktop stretch-utils utils'
+#   - filename: testing
+#     repo: 'deb {{ apt_mirror_url }} testing main contrib non-free'
 #     state: present
-#   - filename: 'docker'
-#     repo: 'deb https://download.docker.com/linux/debian stretch stable'
+#   - filename: testing
+#     repo: 'deb {{ apt_mirror_url }} testing-updates main contrib non-free'
+#     state: present
+#   - filename: testing
+#     repo: 'deb {{ apt_security_url }} testing-security main contrib non-free'
 #     state: present
 
 # use backports
