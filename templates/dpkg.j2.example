@@ -1,5 +1,0 @@
-// {{ ansible_managed }}. role: {{ role_name }}. template: dpkg_options.j2
-
-// This is an example, you should copy this file in your Ansible templates
-// search path as dpkg_options.j2, tweak it and remove this comment.
-DPkg::Options { "--force-confdef"; "--force-confold"; }

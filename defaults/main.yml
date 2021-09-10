@@ -73,3 +73,11 @@ apt_components:
 # apt_pad (APT option Proxy-Auto-Detect)
 # Executable to use with APT to auto-detect http(s) proxy
 # apt_pad: '/usr/local/bin/proxy-auto-detect'
+
+# apt_dpkg_config (dpkg custom parameters)
+# if defined, these parameters will go in /etc/apt/apt.conf.d/80dpkg
+# apt_dpkg_config:
+#   - 'DPkg::Options { "--force-confdef"; }'
+#   - 'DPkg::Options { "--force-confold"; }'
+#   - 'DPkg::Pre-Invoke { "mount -o remount,exec /tmp"; }'
+#   - 'DPkg::Post-Invoke { "mount -o remount /tmp"; }'

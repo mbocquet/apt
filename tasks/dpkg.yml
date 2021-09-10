@@ -1,35 +1,12 @@
 ---
-- name: dpkg options
+- name: dpkg
   template:
-    src: dpkg_options.j2
+    src: dpkg.j2
     dest: /etc/apt/apt.conf.d/80dpkg
     owner: root
     group: root
     mode: 0644
+  when: apt_dpkg_config is defined
   tags:
     - apt
     - dpkg
-    - options
-
-- name: check for noexec /tmp
-  shell: grep -wq /tmp.*noexec /etc/fstab
-  ignore_errors: true
-  register: tmp_noexec
-  changed_when: false
-  tags:
-    - apt
-    - dpkg
-    - tmp
-
-- name: dpkg options for noexec /tmp
-  template:
-    src: dpkg_tmp.j2
-    dest: /etc/apt/apt.conf.d/81dpkg
-    owner: root
-    group: root
-    mode: 0644
-  when: tmp_noexec is succeeded
-  tags:
-    - apt
-    - dpkg
-    - tmp
