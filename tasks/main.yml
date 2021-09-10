@@ -140,28 +140,24 @@
     - sources.list.d
     - repositories
 
-- name: "remove *-updates preferences"
+- name: proposed-updates preferences
   file:
-    path: |-
-      "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}
-      {% elif apt_release is defined %}{{ apt_release }}{% else %}
-      {{ ansible_distribution_release }}{% endif %}-updates"
+    path: /etc/apt/preferences.d/proposed-updates
     state: absent
   notify:
     - gen caches
-  when: apt_proposed_updates is not defined or apt_proposed_updates|lower() in ['false','no']
+  when:
+    apt_proposed_updates is not defined or
+    apt_proposed_updates|lower() in ['false','no']
   tags:
     - apt
-    - updates
     - preferences
+    - proposed-updates
 
-- name: allow 'release'-updates via preferences
+- name: proposed-updates preferences
   template:
     src: updates.preferences.j2
-    dest: |-
-      "/etc/apt/preferences.d/{% if apt_codename is defined %}{{ apt_codename }}
-      {% elif apt_release is defined %}{{ apt_release }}{% else %}
-      {{ ansible_distribution_release }}{% endif %}-updates"
+    dest: /etc/apt/preferences.d/proposed-updates
     owner: root
     group: root
     mode: 0644
@@ -172,8 +168,8 @@
     - apt_proposed_updates|lower() in ['true','yes']
   tags:
     - apt
-    - updates
     - preferences
+    - proposed-updates
 
 - name: apt-daily timer override dir
   file:
