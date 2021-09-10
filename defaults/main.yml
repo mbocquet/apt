@@ -25,13 +25,13 @@ apt_debs:
 #  - deb-src
 
 # mirrors URLs
+apt_mirror_url: 'http://deb.debian.org/debian'
 # Install apt-transport-https before enabling https in sources URLs
 # apt_mirror_url: 'https://deb.debian.org/debian'
-apt_mirror_url: 'http://deb.debian.org/debian'
 
 # The following two variables are ignored during Raspbian sources.list
 # construction from template
-apt_security_url: 'https://deb.debian.org/debian-security'
+apt_security_url: 'http://deb.debian.org/debian-security'
 
 # handle proposed-updates repository
 apt_proposed_updates: false
@@ -50,7 +50,7 @@ apt_components:
 #   - rpi
 
 # additional repositories to add
-# example to add testing :
+# example to add testing repositories :
 # apt_repositories:
 #   - filename: testing
 #     repo: 'deb {{ apt_mirror_url }} testing main contrib non-free'
