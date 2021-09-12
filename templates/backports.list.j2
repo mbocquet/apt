@@ -1,5 +1,5 @@
-# {{ ansible_managed }}. role : apt, file : backports.list.j2
+# {{ ansible_managed }}. role: {{ role_name }}, template: backports.list.j2
 
-{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb['codename'] }}{% endif %}-backports{% for component in apt_components %} {{ component }}{% endfor %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% else %}{{ ansible_lsb.codename }}{% endif %}-backports{% for component in apt_components %} {{ component }}{% endfor %}
 
 {% endfor %}

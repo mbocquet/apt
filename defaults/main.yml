@@ -63,7 +63,7 @@ apt_components:
 #     state: present
 
 # use backports
-# apt_backports: 'True'
+# apt_backports: true
 
 # apt-daily.timer parameters
 # apt_timer_oncalendar: '*-*-* 6,18:00'

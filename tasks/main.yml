@@ -30,20 +30,6 @@
     - apt
     - network
 
-- name: remove dist-backports.list file if present
-  file:
-    path: "/etc/apt/sources.list.d/{{ apt_codename | default(ansible_distribution_release) }}-backports.list"
-    state: absent
-  notify:
-    - update cache
-  when:
-    - apt_codename is defined
-    - apt_backports is not defined or apt_backports|lower() in ['true','yes']
-  tags:
-    - apt
-    - sources
-    - backports
-
 - name: backports
   template:
     src: backports.list.j2
@@ -55,7 +41,7 @@
     - update cache
   when:
     - apt_backports is defined
-    - apt_backports|lower() in ['true','yes']
+    - apt_backports
   tags:
     - apt
     - sources
@@ -68,7 +54,8 @@
   notify:
     - update cache
   when:
-    apt_backports is not defined or apt_backports|lower() in ['false','no']
+    apt_backports is not defined or
+    not apt_backports
   tags:
     - apt
     - sources
