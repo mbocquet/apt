@@ -1,0 +1,30 @@
+# {{ ansible_managed }}. role: apt, template: sources.list.Ubuntu.j2
+
+{% for deb in apt_debs %}
+{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}
+{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}
+
+{% if apt_proposed_updates is defined and apt_proposed_updates|lower() in ['true','yes'] %}{% for deb in apt_debs %}
+{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}
+{% elif apt_release is defined %}{{ apt_release }}
+{% else %}{{ ansible_distribution_release }}{% endif %}-updates{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+{% if apt_ubuntu_partner is defined and apt_ubuntu_partner|lower() in ['true','yes'] %}
+{% for deb in apt_debs %}
+{{ deb }} http://archive.canonical.com/ubuntu {% if apt_codename is defined %}{{ apt_codename }}
+{% elif apt_release is defined %}{{ apt_release }}
+{% else %}{{ ansible_distribution_release }}{% endif %} partner
+{% endfor %}
+{% endif %}
+
+{% for deb in apt_debs %}
+{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}
+{% elif apt_release is defined %}{{ apt_release }}
+{% else %}{{ ansible_distribution_release }}{% endif %}-security{% for component in apt_components %} {{ component }}{% endfor %}
+
+{% endfor %}
