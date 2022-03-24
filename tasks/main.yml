@@ -94,37 +94,6 @@
     - sources.list.d
     - repositories
 
-- name: proposed-updates preferences
-  file:
-    path: /etc/apt/preferences.d/proposed-updates
-    state: absent
-  notify:
-    - gen caches
-  when:
-    apt_proposed_updates is not defined or
-    apt_proposed_updates|lower() in ['false','no']
-  tags:
-    - apt
-    - preferences
-    - proposed-updates
-
-- name: proposed-updates preferences
-  template:
-    src: updates.preferences.j2
-    dest: /etc/apt/preferences.d/proposed-updates
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - gen caches
-  when:
-    - apt_proposed_updates is defined
-    - apt_proposed_updates|lower() in ['true','yes']
-  tags:
-    - apt
-    - preferences
-    - proposed-updates
-
 - name: apt-daily timer override dir
   file:
     path: /etc/systemd/system/apt-daily.timer.d
