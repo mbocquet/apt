@@ -2,7 +2,7 @@
 # tasks file for apt
 - name: sources.list
   template:
-    src: "sources.list.{{ ansible_lsb.id | default (ansible_os_family) }}.j2"
+    src: "sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2"
     dest: /etc/apt/sources.list
     backup: true
     owner: root
@@ -14,7 +14,8 @@
     - apt
     - sources.list
 
-- import_tasks: dpkg.yml
+- name: dpkg
+  import_tasks: dpkg.yml
 
 - name: network options
   template:
