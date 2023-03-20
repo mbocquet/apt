@@ -42,6 +42,22 @@ apt_components:
   # - contrib
   # - non-free
 
+# apt_proposed_components and apt_security_components are there to handle the
+# new non-free-firmware transition actually only usable for testing, unstable,
+# experimental, stable-updates and security.
+
+# apt_proposed_components:
+  # - main
+  # - contrib
+  # - non-free
+  # - non-free-firmware
+
+# apt_security_components:
+  # - main
+  # - contrib
+  # - non-free
+  # - non-free-firmware
+
 # default components for Raspbian
 # apt_components:
 #   - main
