@@ -47,16 +47,16 @@ apt_components:
 # experimental, stable-updates and security.
 
 # apt_proposed_components:
-  # - main
-  # - contrib
-  # - non-free
-  # - non-free-firmware
+#   - main
+#   - contrib
+#   - non-free
+#   - non-free-firmware
 
 # apt_security_components:
-  # - main
-  # - contrib
-  # - non-free
-  # - non-free-firmware
+#   - main
+#   - contrib
+#   - non-free
+#   - non-free-firmware
 
 # default components for Raspbian
 # apt_components:
