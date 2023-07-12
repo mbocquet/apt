@@ -41,6 +41,7 @@ apt_components:
   - main
   # - contrib
   # - non-free
+  # - non-free-firmware
 
 # apt_proposed_components and apt_security_components are there to handle the
 # new non-free-firmware transition actually only usable for testing, unstable,
