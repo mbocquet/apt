@@ -1,4 +1,8 @@
 # {{ ansible_managed }}. role: {{ role_name }}, template: extra.preferences.j2
 Package: *
+{% if item.archive is defined %}
 Pin: release o=Debian,a={{ item.archive }}
+{% elif item.codename is defined %}
+Pin: release o=Debian,n={{ item.codename }}
+{% endif %}
 Pin-Priority: {{ item.apt_pin_priority }}
