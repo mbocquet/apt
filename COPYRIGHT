@@ -1,6 +1,6 @@
 'apt'. Ansible role to configure APT (Advanced Package Tool) on Debian.
 
-Copyright © 2018-2023 Mathias Bocquet (mbocquet@sekoya.org)
+Copyright © 2018-2024 Mathias Bocquet (mbocquet@sekoya.org)
 
 This file is part of 'apt' Ansible role.
 
