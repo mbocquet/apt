@@ -7,10 +7,10 @@
 
 # Only one of these two variables should be defined :
 #
-# apt_codename : value should be a codename in 'stretch', 'buster' or
-# 'bullseye', etc.
+# apt_codename : value should be a codename in 'buster' or 'bullseye',
+# 'bookworm', etc.
 #
-# apt_codename: 'buster'
+# apt_codename: 'bookworm'
 #
 # or
 #
@@ -18,6 +18,45 @@
 # etc.
 #
 # apt_release: 'stable'
+
+# apt_sources_style : sources.list style. should be a value in 'one-line' or
+# 'deb822'. deb822 is intented to become the default format. See sources.list
+# manpage for further explanations.
+
+# apt_sources_style: one-line
+
+# With deb822 format, we use a list of sources defined in /etc/apt/sources.list.d/name.sources
+# apt_sources:
+#   - name: debian
+#     types:
+#       - deb
+#       - deb-src
+#     uris:
+#     suites:
+#       - bookworm
+#       - bookworm-updates
+#       - bookworm-backports
+#     components:
+#       - main
+#       - non-free-firmware
+#   - name: debian-security
+#     types:
+#       - deb
+#       - deb-src
+#     uris:
+#     suites:
+#       - bookworm-security
+#     components:
+#       - main
+#       - non-free-firmware
+# With deb822 format, we use a list of mirrors each in its /etc/apt/mirrors/mirror-name.list
+# apt_mirrors:
+#   - name: debian
+#     mirrors:
+#       - https://deb.debian.org/debian
+#   - name: debian-security
+#     mirrors:
+#       - https://deb.debian.org/debian-security
 
 # just deb or also deb-src
 apt_debs:
@@ -37,6 +76,8 @@ apt_security_url: 'http://deb.debian.org/debian-security'
 apt_proposed_updates: false
 
 # default components for Debian
+# non-free is for Debian versions < 12
+# non-free-firmware is for Debian version >= 12
 apt_components:
   - main
   # - contrib
@@ -44,8 +85,8 @@ apt_components:
   # - non-free-firmware
 
 # apt_proposed_components and apt_security_components are there to handle the
-# new non-free-firmware transition actually only usable for testing, unstable,
-# experimental, stable-updates and security.
+# non-free-firmware transition usable for testing, unstable, experimental,
+# stable-updates and security.
 
 # apt_proposed_components:
 #   - main

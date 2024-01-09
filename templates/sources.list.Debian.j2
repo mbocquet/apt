@@ -1,5 +1,6 @@
 # {{ ansible_managed }}. role: apt, template: sources.list.Debian.j2
 
+{% if apt_sources_style is undefined or apt_sources_style|lower == 'one-line' %}
 {% for deb in apt_debs %}
 {{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}
 {% for component in apt_components %} {{ component }}{% endfor %}
@@ -16,4 +17,7 @@
 {% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates{% for component in apt_proposed_components | default(apt_components) %} {{ component }}{% endfor %}
 
 {% endfor %}
+{% endif %}
+{% else %}
+# See /etc/apt/sources.list.d/debian.sources
 {% endif %}
