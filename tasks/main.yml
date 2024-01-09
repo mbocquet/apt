@@ -1,7 +1,7 @@
 ---
 # tasks file for apt
-- name: sources.list
-  template:
+- name: Sources
+  ansible.builtin.template:
     src: "sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2"
     dest: /etc/apt/sources.list
     backup: true
@@ -14,15 +14,15 @@
     - apt
     - sources.list
 
-- name: deb822
+- name: Deb822
   when:
     - apt_sources_style is defined
     - apt_sources_style | lower == 'deb822'
   tags:
     - deb822
   block:
-    - name: sources
-      template:
+    - name: Sources
+      ansible.builtin.template:
         src: deb822.sources.j2
         dest: "/etc/apt/sources.list.d/{{ item.name }}.sources"
         backup: true
@@ -35,8 +35,8 @@
       tags:
         - sources
 
-    - name: mirrors
-      template:
+    - name: Mirrors
+      ansible.builtin.template:
         src: deb822_mirrors.list.j2
         dest: "/etc/apt/mirrors/{{ item.name }}.list"
         backup: true
@@ -49,11 +49,11 @@
       tags:
         - mirrors
 
-- name: dpkg
-  import_tasks: dpkg.yml
+- name: Dpkg
+  ansible.builtin.import_tasks: dpkg.yml
 
-- name: network options
-  template:
+- name: Network options
+  ansible.builtin.template:
     src: network.j2
     dest: /etc/apt/apt.conf.d/30network
     owner: root
@@ -66,8 +66,8 @@
     - apt
     - network
 
-- name: backports
-  template:
+- name: Backports
+  ansible.builtin.template:
     src: backports.list.j2
     dest: /etc/apt/sources.list.d/backports.list
     owner: root
@@ -83,8 +83,8 @@
     - sources
     - backports
 
-- name: remove backports.list
-  file:
+- name: Remove backports.list
+  ansible.builtin.file:
     path: /etc/apt/sources.list.d/backports.list
     state: absent
   notify:
@@ -97,8 +97,8 @@
     - sources
     - backports
 
-- name: additional repositories preferences
-  template:
+- name: Additional repositories preferences
+  ansible.builtin.template:
     src: extra.preferences.j2
     dest: "/etc/apt/preferences.d/{{ item.filename }}"
     owner: root
@@ -115,8 +115,8 @@
     - extra
     - preferences
 
-- name: additional repositories
-  apt_repository:
+- name: Additional repositories
+  ansible.builtin.apt_repository:
     filename: "{{ item.filename }}"
     repo: "{{ item.repo }}"
     state: "{{ item.state }}"
@@ -130,8 +130,8 @@
     - sources.list.d
     - repositories
 
-- name: apt-daily timer override dir
-  file:
+- name: Daily timer override dir
+  ansible.builtin.file:
     path: /etc/systemd/system/apt-daily.timer.d
     state: directory
     owner: root
@@ -145,8 +145,8 @@
     - apt
     - timer
 
-- name: apt-daily timer override
-  template:
+- name: Daily timer override
+  ansible.builtin.template:
     src: apt-daily.timer.override.conf.j2
     dest: /etc/systemd/system/apt-daily.timer.d/override.conf
     owner: root
@@ -157,13 +157,13 @@
     apt_timer_randomizeddelaysec is defined or
     apt_timer_persistent is defined
   notify:
-    - systemd reload
+    - Systemd reload
   tags:
     - apt
     - timer
 
-- name: remove apt-daily timer override
-  file:
+- name: Remove apt-daily timer override
+  ansible.builtin.file:
     path: /etc/systemd/system/apt-daily.timer.d/override.conf
     state: absent
   when:
@@ -173,13 +173,13 @@
     apt_timer_persistent is defined
     )
   notify:
-    - systemd reload
+    - Systemd reload
   tags:
     - apt
     - timer
 
-- name: remove apt-daily timer override dir
-  file:
+- name: Remove apt-daily timer override dir
+  ansible.builtin.file:
     path: /etc/systemd/system/apt-daily.timer.d
     state: absent
   when:

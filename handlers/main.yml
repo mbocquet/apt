@@ -1,18 +1,18 @@
 ---
 # handlers file for apt
-- name: update cache
-  apt:
+- name: Update cache
+  ansible.builtin.apt:
     update_cache: true
   when:
     - not ansible_check_mode
 
-- name: gen caches
-  command: apt-cache gencaches
+- name: Regenerate apt caches
+  ansible.builtin.command: apt-cache gencaches
   when:
     - not ansible_check_mode
 
-- name: systemd reload
-  systemd:
+- name: Systemd reload
+  ansible.builtin.systemd:
     daemon_reload: true
   when:
     - not ansible_check_mode

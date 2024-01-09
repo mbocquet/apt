@@ -1,6 +1,6 @@
 ---
-- name: dpkg
-  template:
+- name: Dpkg options
+  ansible.builtin.template:
     src: dpkg.j2
     dest: /etc/apt/apt.conf.d/80dpkg
     owner: root
