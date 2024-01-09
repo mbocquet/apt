@@ -14,6 +14,41 @@
     - apt
     - sources.list
 
+- name: deb822
+  when:
+    - apt_sources_style is defined
+    - apt_sources_style | lower == 'deb822'
+  tags:
+    - deb822
+  block:
+    - name: sources
+      template:
+        src: deb822.sources.j2
+        dest: "/etc/apt/sources.list.d/{{ item.name }}.sources"
+        backup: true
+        owner: root
+        group: root
+        mode: 0644
+      loop: "{{ apt_sources }}"
+      notify:
+        - update cache
+      tags:
+        - sources
+
+    - name: mirrors
+      template:
+        src: deb822_mirrors.list.j2
+        dest: "/etc/apt/mirrors/{{ item.name }}.list"
+        backup: true
+        owner: root
+        group: root
+        mode: 0644
+      loop: "{{ apt_mirrors }}"
+      notify:
+        - update cache
+      tags:
+        - mirrors
+
 - name: dpkg
   import_tasks: dpkg.yml
 
