@@ -9,7 +9,7 @@
     group: root
     mode: 0644
   notify:
-    - update cache
+    - Update cache
   tags:
     - apt
     - sources.list
@@ -31,7 +31,7 @@
         mode: 0644
       loop: "{{ apt_sources }}"
       notify:
-        - update cache
+        - Update cache
       tags:
         - sources
 
@@ -45,7 +45,7 @@
         mode: 0644
       loop: "{{ apt_mirrors }}"
       notify:
-        - update cache
+        - Update cache
       tags:
         - mirrors
 
@@ -74,7 +74,7 @@
     group: root
     mode: 0644
   notify:
-    - update cache
+    - Update cache
   when:
     - apt_backports is defined
     - apt_backports
@@ -88,7 +88,7 @@
     path: /etc/apt/sources.list.d/backports.list
     state: absent
   notify:
-    - update cache
+    - Update cache
   when:
     apt_backports is not defined or
     not apt_backports
@@ -123,7 +123,7 @@
     update_cache: false
   loop: "{{ apt_repositories }}"
   notify:
-    - update cache
+    - Update cache
   when: apt_repositories is defined
   tags:
     - apt
