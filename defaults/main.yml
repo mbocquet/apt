@@ -39,6 +39,7 @@
 #           - bookworm-backports
 #         components:
 #           - main
+#           - contrib
 #           - non-free-firmware
 #       - name: debian-security
 #         types:
