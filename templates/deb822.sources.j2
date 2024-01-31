@@ -1,8 +1,7 @@
-# {{ ansible_managed }}. role: {{ role_name }}. template: deb822.sources.j2
 {% for source in item.contents %}
-
 Types: {{ source.types | join(' ') }}
 URIs: mirror+file:///etc/apt/mirrors/{{ source.name }}.list
 Suites: {{ source.suites | join(' ') }}
 Components: {{ source.components | join(' ') }}
+
 {% endfor %}
