@@ -25,7 +25,8 @@
 
 # apt_sources_style: one-line
 
-# With deb822 format, we use a list of sources defined in /etc/apt/sources.list.d/name.sources
+# With deb822 format, we use a list of sources defined in
+# /etc/apt/sources.list.d/name.sources
 # apt_sources:
 #   - name: debian
 #     contents:
@@ -50,7 +51,8 @@
 #         components:
 #           - main
 #           - non-free-firmware
-# With deb822 format, we use a list of mirrors each in its /etc/apt/mirrors/mirror-name.list
+# With deb822 format, we use a list of mirrors each in its
+# /etc/apt/mirrors/mirror-name.list
 # apt_mirrors:
 #   - name: debian
 #     mirrors:

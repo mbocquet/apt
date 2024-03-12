@@ -10,6 +10,7 @@
   ansible.builtin.command: apt-cache gencaches
   when:
     - not ansible_check_mode
+  changed_when: false
 
 - name: Systemd reload
   ansible.builtin.systemd:
