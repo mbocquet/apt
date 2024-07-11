@@ -8,7 +8,7 @@
 {% endfor %}
 
 {% if apt_security_url is defined %}
-{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}{% if ansible_distribution_major_version|int >= 11 or ( apt_codename is defined and apt_codename in ['bullseye','bookworm'] ) or ansible_distribution_version in ['stable','testing'] or ansible_distribution_release in ['bookworm'] %}-security{% else %}/updates{% endif %}{% for component in apt_security_components | default(apt_components) %} {{ component }}{% endfor %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}{% if ansible_distribution_major_version|int >= 11 or ( apt_codename is defined and apt_codename in ['bullseye','bookworm'] ) or ansible_distribution_version in ['stable','testing'] or ansible_distribution_release in ['bookworm','trixie'] %}-security{% else %}/updates{% endif %}{% for component in apt_security_components | default(apt_components) %} {{ component }}{% endfor %}
 
 {% endfor %}
 {% endif %}
