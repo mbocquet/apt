@@ -106,7 +106,7 @@
     mode: 0644
   loop: "{{ apt_repositories }}"
   notify:
-    - gen caches
+    - Regenerate apt caches
   when:
     - apt_repositories is defined
     - item.apt_pin_priority is defined
