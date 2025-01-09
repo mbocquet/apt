@@ -75,11 +75,15 @@ apt_mirror_url: 'http://deb.debian.org/debian'
 # construction from template
 apt_security_url: 'http://deb.debian.org/debian-security'
 
-# handle proposed-updates repository
+# use {codename}-updates repository
+# default is true
+apt_updates: true
+
+# use {codename}-proposed-updates repository
+# default is false
 apt_proposed_updates: false
 
 # default components for Debian
-# non-free is for Debian versions < 12
 # non-free-firmware is for Debian version >= 12
 apt_components:
   - main
