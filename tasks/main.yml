@@ -33,6 +33,7 @@
       notify:
         - Update cache
       tags:
+        - apt
         - sources
 
     - name: Mirrors
@@ -47,6 +48,7 @@
       notify:
         - Update cache
       tags:
+        - apt
         - mirrors
 
 - name: Dpkg
