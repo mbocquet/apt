@@ -1,4 +1,4 @@
-# {{ ansible_managed }}. role: apt, template: sources.list.Debian.j2
+# Ansible managed. role: apt, template: sources.list.Debian.j2
 
 {% if apt_sources_style is undefined or apt_sources_style|lower == 'one-line' %}
 {% for deb in apt_debs %}

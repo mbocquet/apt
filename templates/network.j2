@@ -1,4 +1,4 @@
-// {{ ansible_managed }} (role: apt, template: network.j2)
+// Ansible managed (role: apt, template: network.j2)
 {% if proxy_env is defined and proxy_env != '' %}
 Acquire::http::Proxy "{{ proxy }}";
 Acquire::https::Proxy "{{ proxy }}";

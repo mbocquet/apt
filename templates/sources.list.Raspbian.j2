@@ -1,4 +1,4 @@
-# {{ ansible_managed }}. role: apt, template: sources.list.Raspbian.j2
+# Ansible managed. role: apt, template: sources.list.Raspbian.j2
 
 {% for deb in apt_debs %}
 {{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}
