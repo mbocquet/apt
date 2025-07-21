@@ -1,7 +1,14 @@
 {% for source in item.contents %}
 Types: {{ source.types | join(' ') }}
+{% if source.uris is defined %}
+URIs: {{ source.uris | join(' ') }}
+{% elif apt_mirrors is defined %}
 URIs: mirror+file:///etc/apt/mirrors/{{ source.name }}.list
+{% endif %}
 Suites: {{ source.suites | join(' ') }}
 Components: {{ source.components | join(' ') }}
+{% if source.signed_by is defined %}
+Signed-By: {{ source.signed_by }}
+{% endif %}
 
 {% endfor %}
