@@ -2,8 +2,7 @@
 # tasks file for apt
 - name: Sources
   when:
-    - apt_sources_style is defined
-    - apt_sources_style | lower != 'deb822'
+    - apt_sources_style is undefined or apt_sources_style | lower != 'deb822'
   ansible.builtin.template:
     src: "sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2"
     dest: /etc/apt/sources.list
