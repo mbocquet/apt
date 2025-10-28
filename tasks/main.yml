@@ -9,7 +9,7 @@
     backup: true
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - Update cache
   tags:
@@ -30,7 +30,7 @@
         backup: true
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
       loop: "{{ apt_sources }}"
       notify:
         - Update cache
@@ -45,7 +45,7 @@
         backup: true
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
       loop: "{{ apt_mirrors }}"
       when: apt_mirrors is defined
       notify:
@@ -63,7 +63,7 @@
     dest: /etc/apt/apt.conf.d/30network
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     proxy_env is defined or
     apt_pad is defined
@@ -77,7 +77,7 @@
     dest: /etc/apt/sources.list.d/backports.list
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - Update cache
   when:
@@ -108,7 +108,7 @@
     dest: "/etc/apt/preferences.d/{{ item.filename }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop: "{{ apt_repositories }}"
   notify:
     - Regenerate apt caches
@@ -141,7 +141,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   when:
     apt_timer_oncalendar is defined or
     apt_timer_randomizeddelaysec is defined or
@@ -156,7 +156,7 @@
     dest: /etc/systemd/system/apt-daily.timer.d/override.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     apt_timer_oncalendar is defined or
     apt_timer_randomizeddelaysec is defined or
