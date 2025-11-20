@@ -10,14 +10,14 @@
 # apt_codename : value should be a codename in 'buster' or 'bullseye',
 # 'bookworm', etc.
 #
-# apt_codename: 'bookworm'
+# apt_codename: bookworm
 #
 # or
 #
 # apt_release : value should be a release in 'stable', 'testing', 'unstable',
 # etc.
 #
-# apt_release: 'stable'
+# apt_release: stable
 
 # apt_sources_style : sources.list style. should be a value in 'one-line' or
 # 'deb822'. deb822 is intented to become the default format. See sources.list
@@ -67,13 +67,13 @@ apt_debs:
 #  - deb-src
 
 # mirrors URLs
-apt_mirror_url: 'http://deb.debian.org/debian'
+apt_mirror_url: http://deb.debian.org/debian
 # Install apt-transport-https before enabling https in sources URLs
-# apt_mirror_url: 'https://deb.debian.org/debian'
+# apt_mirror_url: https://deb.debian.org/debian
 
 # The following two variables are ignored during Raspbian sources.list
 # construction from template
-apt_security_url: 'http://deb.debian.org/debian-security'
+apt_security_url: http://deb.debian.org/debian-security
 
 # use {codename}-updates repository
 # default is true
@@ -118,31 +118,31 @@ apt_components:
 # example to add testing repositories :
 # apt_repositories:
 #   - filename: testing
-#     repo: 'deb {{ apt_mirror_url }} testing main contrib non-free'
+#     repo: deb {{ apt_mirror_url }} testing main contrib non-free
 #     state: present
 #   - filename: testing
-#     repo: 'deb {{ apt_mirror_url }} testing-updates main contrib non-free'
+#     repo: deb {{ apt_mirror_url }} testing-updates main contrib non-free
 #     state: present
 #   - filename: testing
-#     repo: 'deb {{ apt_security_url }} testing-security main contrib non-free'
+#     repo: deb {{ apt_security_url }} testing-security main contrib non-free
 #     state: present
 
 # use backports
 # apt_backports: true
 
 # apt-daily.timer parameters
-# apt_timer_oncalendar: '*-*-* 6,18:00'
-# apt_timer_randomizeddelaysec: '12h'
-# apt_timer_persistent: 'true'
+# apt_timer_oncalendar: *-*-* 6,18:00
+# apt_timer_randomizeddelaysec: 12h
+# apt_timer_persistent: true
 
 # apt_pad (APT option Proxy-Auto-Detect)
 # Executable to use with APT to auto-detect http(s) proxy
-# apt_pad: '/usr/local/bin/proxy-auto-detect'
+# apt_pad: /usr/local/bin/proxy-auto-detect
 
 # apt_dpkg_config (dpkg custom parameters)
 # if defined, these parameters will go in /etc/apt/apt.conf.d/80dpkg
 # apt_dpkg_config:
-#   - 'DPkg::Options { "--force-confdef"; }'
-#   - 'DPkg::Options { "--force-confold"; }'
-#   - 'DPkg::Pre-Invoke { "mount -o remount,exec /tmp"; }'
-#   - 'DPkg::Post-Invoke { "mount -o remount /tmp"; }'
+#   - DPkg::Options { "--force-confdef"; }
+#   - DPkg::Options { "--force-confold"; }
+#   - DPkg::Pre-Invoke { "mount -o remount,exec /tmp"; }
+#   - DPkg::Post-Invoke { "mount -o remount /tmp"; }
