@@ -4,7 +4,7 @@
   when:
     - apt_sources_style is undefined or apt_sources_style | lower != 'deb822'
   ansible.builtin.template:
-    src: "sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2"
+    src: sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2
     dest: /etc/apt/sources.list
     backup: true
     owner: root
@@ -26,7 +26,7 @@
     - name: Sources
       ansible.builtin.template:
         src: deb822.sources.j2
-        dest: "/etc/apt/sources.list.d/{{ item.name }}.sources"
+        dest: /etc/apt/sources.list.d/{{ item.name }}.sources
         backup: true
         owner: root
         group: root
@@ -41,7 +41,7 @@
     - name: Mirrors
       ansible.builtin.template:
         src: deb822_mirrors.list.j2
-        dest: "/etc/apt/mirrors/{{ item.name }}.list"
+        dest: /etc/apt/mirrors/{{ item.name }}.list
         backup: true
         owner: root
         group: root
@@ -105,7 +105,7 @@
 - name: Additional repositories preferences
   ansible.builtin.template:
     src: extra.preferences.j2
-    dest: "/etc/apt/preferences.d/{{ item.filename }}"
+    dest: /etc/apt/preferences.d/{{ item.filename }}
     owner: root
     group: root
     mode: "0644"
