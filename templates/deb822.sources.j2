@@ -1,4 +1,6 @@
+# Ansible managed. role: apt. file: deb822.sources.j2
 {% for source in item.contents %}
+
 Types: {{ source.types | join(' ') }}
 {% if source.uris is defined %}
 URIs: {{ source.uris | join(' ') }}
@@ -10,5 +12,4 @@ Components: {{ source.components | join(' ') }}
 {% if source.signed_by is defined %}
 Signed-By: {{ source.signed_by }}
 {% endif %}
-
 {% endfor %}
