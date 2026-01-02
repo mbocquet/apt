@@ -4,7 +4,7 @@
   when:
     - apt_sources_style is undefined or apt_sources_style | lower != 'deb822'
   ansible.builtin.template:
-    src: sources.list.{{ ansible_lsb.id | default(ansible_os_family) }}.j2
+    src: sources.list.{{ ansible_os_family }}.j2
     dest: /etc/apt/sources.list
     backup: true
     owner: root
@@ -38,6 +38,18 @@
         - apt
         - sources
 
+    - name: Mirrors directory
+      ansible.builtin.file:
+        path: /etc/apt/mirrors
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+      when: apt_mirrors is defined
+      tags:
+        - apt
+        - mirrors
+
     - name: Mirrors
       ansible.builtin.template:
         src: deb822_mirrors.list.j2
@@ -48,6 +60,20 @@
         mode: "0644"
       loop: "{{ apt_mirrors }}"
       when: apt_mirrors is defined
+      notify:
+        - Update cache
+      tags:
+        - apt
+        - mirrors
+
+    - name: Not deb822 sources.list
+      ansible.builtin.template:
+        src: deb822.sources.list.j2
+        dest: /etc/apt/sources.list
+        backup: true
+        owner: root
+        group: root
+        mode: "0644"
       notify:
         - Update cache
       tags:
