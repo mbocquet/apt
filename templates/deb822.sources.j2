@@ -8,6 +8,9 @@ URIs: {{ source.uris | join(' ') }}
 URIs: mirror+file:///etc/apt/mirrors/{{ source.name }}.list
 {% endif %}
 Suites: {{ source.suites | join(' ') }}
+{% if source.architectures is defined %}
+Architectures: {{ source.architectures | join(' ') }}
+{% endif %}
 Components: {{ source.components | join(' ') }}
 {% if source.signed_by is defined %}
 Signed-By: {{ source.signed_by }}
