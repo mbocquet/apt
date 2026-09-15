@@ -2,28 +2,26 @@
 
 {% if apt_sources_style is undefined or apt_sources_style|lower == 'one-line' %}
 {% for deb in apt_debs %}
-{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}
+{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_facts.distribution_release }}{% endif %}
 {% for component in apt_components %} {{ component }}{% endfor %}
 
 {% endfor %}
 
-{% if apt_security_url is defined %}
-{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}{% if ansible_distribution_major_version|int >= 11 or ( apt_codename is defined and apt_codename in ['bullseye','bookworm'] ) or ansible_distribution_version in ['stable','testing'] or ansible_distribution_release in ['bookworm','trixie'] %}-security{% else %}/updates{% endif %}{% for component in apt_security_components | default(apt_components) %} {{ component }}{% endfor %}
+{% if apt_security_url is defined and ansible_facts.distribution_major_version|int > 11 %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_security_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_facts.distribution_release }}{% endif %}{% if ansible_facts.distribution_major_version|int > 11 or ( apt_codename is defined and apt_codename == 'bookworm' ) or ansible_facts.distribution_version in ['stable','testing'] or ansible_facts.distribution_release in ['bookworm','trixie'] %}-security{% else %}/updates{% endif %}{% for component in apt_security_components | default(apt_components) %} {{ component }}{% endfor %}
 
 {% endfor %}
 {% endif %}
 
 {% if apt_updates is defined and apt_updates %}
-{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-updates{% for component in apt_proposed_components | default(apt_components) %} {{ component }}{% endfor %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_facts.distribution_release }}{% endif %}-updates{% for component in apt_proposed_components | default(apt_components) %} {{ component }}{% endfor %}
 
 {% endfor %}
 {% endif %}
 
 {% if apt_proposed_updates is defined and apt_proposed_updates %}
-{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_distribution_release }}{% endif %}-proposed-updates{% for component in apt_proposed_components | default(apt_components) %} {{ component }}{% endfor %}
+{% for deb in apt_debs %}{{ deb }} {{ apt_mirror_url }} {% if apt_codename is defined %}{{ apt_codename }}{% elif apt_release is defined %}{{ apt_release }}{% else %}{{ ansible_facts.distribution_release }}{% endif %}-proposed-updates{% for component in apt_proposed_components | default(apt_components) %} {{ component }}{% endfor %}
 
 {% endfor %}
 {% endif %}
-{% else %}
-# See /etc/apt/sources.list.d/debian.sources
 {% endif %}
