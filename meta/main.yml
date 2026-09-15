@@ -14,7 +14,18 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - all
+        # - etch # deprecated
+        # - lenny # deprecated
+        # - squeeze # deprecated
+        # - wheezy # deprecated
+        # - jessie # deprecated
+        # - stretch # deprecated
+        # - buster # deprecated
+        - bullseye
+        - bookworm
+        - trixie
+        - forky
+        - sid
 
   galaxy_tags:
     - apt
