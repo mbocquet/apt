@@ -70,10 +70,13 @@
         - apt
         - mirrors
 
-    - name: Not deb822 sources.list
-      ansible.builtin.file:
-        path: /etc/apt/sources.list
-        state: absent
+    - name: Empty legacy sources.list
+      ansible.builtin.template:
+        src: sources.list.empty.j2
+        dest: /etc/apt/sources.list
+        owner: root
+        group: root
+        mode: "0644"
       notify:
         - Update cache
       tags:
